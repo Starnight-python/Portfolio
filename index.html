@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python & Bash Developer Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #111111;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent-python: #3776AB; /* Python Blue */
+            --accent-bash: #4EAA25;   /* Bash Green */
+            --accent-sec: #ff3333;    /* Security Red */
+            --accent-front: #f0db4f;  /* JS Yellow */
+            --border: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .highlight-py { color: var(--accent-python); font-weight: bold; }
+        .highlight-bash { color: var(--accent-bash); font-weight: bold; }
+
+        /* --- Navigation Grid --- */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .nav-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-muted);
+        }
+
+        .nav-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .nav-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Цветовые акценты для карточек */
+        .card-be:hover { border-color: var(--accent-python); box-shadow: 0 0 15px rgba(55, 118, 171, 0.2); }
+        .card-sec:hover { border-color: var(--accent-sec); box-shadow: 0 0 15px rgba(255, 51, 51, 0.2); }
+        .card-fe:hover { border-color: var(--accent-front); box-shadow: 0 0 15px rgba(240, 219, 79, 0.2); }
+
+        /* --- Content Sections --- */
+        .content-section {
+            display: none; /* Скрыто по умолчанию */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .info-block {
+            background: #1a1a1a;
+            border-left: 4px solid var(--text-muted);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .my-stack {
+            margin-top: 30px;
+            border-top: 1px dashed var(--border);
+            padding-top: 20px;
+        }
+
+        .tech-tags span {
+            display: inline-block;
+            padding: 5px 12px;
+            background: #222;
+            border-radius: 4px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            border: 1px solid #333;
+        }
+
+        .tg-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #2AABEE;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.2s;
+        }
+        
+        .tg-btn:hover { background: #229ED9; }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--text-muted);
+            cursor: pointer;
+        }
+        .back-link:hover { color: var(--text-main); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Утилиты для цветов текста в разделах */
+        .text-blue { color: var(--accent-python); }
+        .text-red { color: var(--accent-sec); }
+        .text-yellow { color: var(--accent-front); }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <header id="main-header">
+            <h1>Dev<span style="color:#555">::</span>Portfolio</h1>
+            <p class="subtitle">Full <span class="highlight-py">Python</span> + <span class="highlight-bash">Bash</span> Developer</p>
+        </header>
+
+        <!-- MAIN MENU -->
+        <div id="menu" class="nav-grid">
+            
+            <!-- Кнопка Backend -->
+            <div class="nav-card card-be" onclick="openPage('backend')">
+                <h3 class="text-blue">01. Backend</h3>
+                <p>Серверная логика, API, базы данных и архитектура приложений.</p>
+            </div>
+
+            <!-- Кнопка CyberSec -->
+            <div class="nav-card card-sec" onclick="openPage('security')">
+                <h3 class="text-red">02. CyberSec & Bash</h3>
+                <p>Информационная безопасность, скриптинг, Linux и автоматизация.</p>
+            </div>
+
+            <!-- Кнопка Frontend -->
+            <div class="nav-card card-fe" onclick="openPage('frontend')">
+                <h3 class="text-yellow">03. Frontend (Partner)</h3>
+                <p>Клиентская часть и UI/UX дизайн от моего партнера.</p>
+            </div>
+
+        </div>
+
+        <!-- PAGE: BACKEND -->
+        <div id="page-backend" class="content-section">
+            <h2 class="text-blue">Backend Development</h2>
+            
+            <div class="info-block">
+                <span class="info-title">Что это такое?</span>
+                <p><strong>Backend (Бэкенд)</strong> — это "мозг" любого веб-приложения. Это серверная часть, которая скрыта от глаз пользователя, но отвечает за всё: хранение данных, регистрацию пользователей, обработку платежей и логику работы сайта. Без бэкенда сайт — это просто красивая картинка.</p>
+            </div>
+
+            <div class="my-stack">
+                <h3>Мой подход и инструменты</h3>
+                <p>Я специализируюсь на создании масштабируемых и быстрых серверных решений. Мой основной язык — <strong>Python</strong>, так как он предоставляет лучшие инструменты для быстрой разработки и поддержки кода.</p>
+                
+                <div class="tech-tags">
+                    <span class="highlight-py">Python 3.11+</span>
+                    <span>Django / FastAPI</span>
+                    <span>PostgreSQL</span>
+                    <span>Redis</span>
+                    <span>Docker</span>
+                    <span>REST API</span>
+                </div>
+
+                <br>
+                <a href="https://t.me/backend_starnight" class="tg-btn">Мой Telegram (Backend)</a>
+            </div>
+
+            <div class="back-link" onclick="goHome()">← Вернуться в меню</div>
+        </div>
+
+
+        <!-- PAGE: SECURITY -->
+        <div id="page-security" class="content-section">
+            <h2 class="text-red">CyberSecurity & Automation</h2>
+
+            <div class="info-block">
+                <span class="info-title">Что это такое?</span>
+                <p><strong>Кибербезопасность (InfoSec)</strong> — это практика защиты систем, сетей и программ от цифровых атак. Эти атаки обычно направлены на доступ, изменение или уничтожение конфиденциальной информации. В связке с <strong>Bash</strong> это позволяет не только находить уязвимости, но и автоматизировать защиту серверов.</p>
+            </div>
+
+            <div class="my-stack">
+                <h3>Мой стек и обучение</h3>
+                <p>Я фулстэк разработчик в контексте экосистемы Linux. Я не просто пишу код, я понимаю, как он работает в системе.</p>
+                <ul>
+                    <li>🐍 <strong>Python:</strong> Написание эксплойтов, парсеров и инструментов для пентеста.</li>
+                    <li>💻 <strong>Bash:</strong> Глубокое изучение командной строки Linux, написание скриптов автоматизации (автоматический бекап, мониторинг логов, настройка firewall).</li>
+                    <li>🔒 <strong>Network:</strong> Анализ трафика, понимание протоколов TCP/IP, HTTP/S.</li>
+                </ul>
+
+                <div class="tech-tags">
+                    <span class="highlight-bash">Bash Scripting</span>
+                    <span>Linux Hardening</span>
+                    <span>Nmap / Wireshark</span>
+                    <span>Python Security Tools</span>
+                    <span>Cryptography basics</span>
+                </div>
+
+                <br>
+                <a href="https://t.me/cybersec_starnight" class="tg-btn">Читать мой ТГК про Sec</a>
+            </div>
+
+            <div class="back-link" onclick="goHome()">← Вернуться в меню</div>
+        </div>
+
+
+        <!-- PAGE: FRONTEND PARTNER -->
+        <div id="page-frontend" class="content-section">
+            <h2 class="text-yellow">Frontend Development</h2>
+
+            <div class="info-block">
+                <span class="info-title">Что это такое?</span>
+                <p><strong>Frontend (Фронтенд)</strong> — это внешняя оболочка сайта, то, с чем взаимодействует пользователь: кнопки, анимации, адаптивность под мобильные устройства. Хороший фронтенд должен быть удобным и красивым.</p>
+            </div>
+
+            <div class="my-stack">
+                <h3>Наш партнер</h3>
+                <p>Пока я занимаюсь серверной частью и безопасностью, за визуальную реализацию проектов отвечает мой партнер-разработчик.</p>
+                <p>Мы работаем в связке: я предоставляю данные через API, он превращает их в удобный интерфейс.</p>
+
+                <div class="tech-tags">
+                    <span>HTML5 / CSS3</span>
+                    <span>JavaScript (ES6+)</span>
+                    <span>React / Vue.js</span>
+                    <span>Tailwind CSS</span>
+                </div>
+
+                <br>
+                <a href="https://t.me/avenue12_official" class="tg-btn">Профиль Фронтендера</a>
+            </div>
+
+            <div class="back-link" onclick="goHome()">← Вернуться в меню</div>
+        </div>
+
+    </div>
+
+    <script>
+        function openPage(pageName) {
+            // Скрываем меню
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('main-header').style.display = 'none';
+            
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.content-section');
+            pages.forEach(page => page.style.display = 'none');
+
+            // Показываем нужную
+            document.getElementById('page-' + pageName).style.display = 'block';
+            
+            // Скролл вверх
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() {
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.content-section');
+            pages.forEach(page => page.style.display = 'none');
+
+            // Возвращаем меню
+            document.getElementById('menu').style.display = 'grid';
+            document.getElementById('main-header').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
